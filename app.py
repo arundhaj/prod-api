@@ -21,12 +21,10 @@ def index():
 
 
 @app.route('/task', methods=['GET', 'POST'], cors=True)
-def get_task():
+def get_tasks():
     request = app.current_request
     
-    if request.method == 'POST':
-        pass
-    elif request.method == 'GET':
+    if request.method == 'GET':
         resp = service.get_all_tasks()
     
         try:
@@ -35,3 +33,19 @@ def get_task():
             logger.log(sys.exc_info())
     
         return json_resp
+    elif request.method == 'POST':
+        pass
+
+    
+@app.route('/task/{task_id}', methods=['GET', 'PUT'], cors=True)
+def get_task(task_id):
+    request = app.current_request
+    
+    if request.method == 'GET':
+        resp = service.get_task(task_id)
+        json_resp = json.dumps(resp, cls=DateTimeEncoder)
+        
+        return json_resp
+    elif request.method == 'PUT':
+        pass
+    

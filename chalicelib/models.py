@@ -1,5 +1,5 @@
 import os
-from peewee import MySQLDatabase, Model, CharField, ForeignKeyField, DateTimeField, TextField
+from peewee import MySQLDatabase, Model, CharField, ForeignKeyField, DateTimeField, TextField, PrimaryKeyField
 
 
 db = MySQLDatabase(os.environ.get('DB_NAME'), user=os.environ.get('DB_USERNAME'), password=os.environ.get('DB_PASSWORD'),
@@ -24,26 +24,31 @@ class BaseModel(Model):
 
 
 class TaskProject(BaseModel):
+    id = PrimaryKeyField()
     name = CharField()
     description = CharField()
 
 
 class TaskCategory(BaseModel):
+    id = PrimaryKeyField()
     name = CharField()
     description = CharField()
 
 
 class TaskStatus(BaseModel):
+    id = PrimaryKeyField()
     name = CharField()
     description = CharField()
 
 
 class TaskGoal(BaseModel):
+    id = PrimaryKeyField()
     name = CharField()
     description = CharField()
 
 
 class Task(BaseModel):
+    id = PrimaryKeyField()
     assign_date = DateTimeField()
     assigned_by = CharField()
     project = ForeignKeyField(TaskProject, related_name='tasks')
@@ -60,6 +65,7 @@ class Task(BaseModel):
 
 # ExpenseCategory.create_table(True)
 # Expense.create_table(True)
+
 
 try:
     db.connect()
