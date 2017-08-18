@@ -20,8 +20,76 @@ def index():
     return {'hello': 'world'}
 
 
+@app.route('/project', methods=['GET', 'POST'], cors=True)
+def projects():
+    request = app.current_request
+    
+    if request.method == 'GET':
+        resp = service.get_all_projects()
+    
+        try:
+            json_resp = json.dumps(resp)
+        except:
+            logger.log(sys.exc_info())
+    
+        return json_resp
+    elif request.method == 'POST':
+        pass
+
+
+@app.route('/category', methods=['GET', 'POST'], cors=True)
+def categories():
+    request = app.current_request
+    
+    if request.method == 'GET':
+        resp = service.get_all_categories()
+    
+        try:
+            json_resp = json.dumps(resp)
+        except:
+            logger.log(sys.exc_info())
+    
+        return json_resp
+    elif request.method == 'POST':
+        pass
+
+
+@app.route('/goal', methods=['GET', 'POST'], cors=True)
+def goals():
+    request = app.current_request
+    
+    if request.method == 'GET':
+        resp = service.get_all_goals()
+    
+        try:
+            json_resp = json.dumps(resp)
+        except:
+            logger.log(sys.exc_info())
+    
+        return json_resp
+    elif request.method == 'POST':
+        pass
+
+
+@app.route('/status', methods=['GET', 'POST'], cors=True)
+def statuses():
+    request = app.current_request
+    
+    if request.method == 'GET':
+        resp = service.get_all_statuses()
+    
+        try:
+            json_resp = json.dumps(resp)
+        except:
+            logger.log(sys.exc_info())
+    
+        return json_resp
+    elif request.method == 'POST':
+        pass
+
+
 @app.route('/task', methods=['GET', 'POST'], cors=True)
-def get_tasks():
+def tasks():
     request = app.current_request
     
     if request.method == 'GET':
@@ -38,7 +106,7 @@ def get_tasks():
 
     
 @app.route('/task/{task_id}', methods=['GET', 'PUT'], cors=True)
-def get_task(task_id):
+def task(task_id):
     request = app.current_request
     
     if request.method == 'GET':
